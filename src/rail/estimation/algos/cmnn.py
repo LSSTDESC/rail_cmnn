@@ -106,6 +106,7 @@ class CMNNPDF(CatEstimator):
                           nondetect_val=SHARED_PARAMS,
                           mag_limits=SHARED_PARAMS,
                           redshift_col=SHARED_PARAMS,
+                          seed=Param(int, 66, msg="random seed used in selection mode"),
                           ppf_value=Param(float, 0.68, msg="PPF value used in Mahalanobis distance"),
                           selection_mode=Param(int, 1, msg="select which mode to choose the redshift estimate:" +
                                                "0: randomly choose, 1: nearest neigh, 2: weighted random"),
@@ -153,6 +154,7 @@ class CMNNPDF(CatEstimator):
         chunk_pz = np.zeros(num_gals)
         chunk_pze = np.zeros(num_gals)
         chunk_ncm = np.zeros(num_gals, dtype=int)
+        rng = np.random.default_rng(seed = self.config.seed + start)
         for ii in range(num_gals):
 
             MahalanobisDistance = np.nansum((test_color[ii] - self.train_color)**2 / test_err[ii]**2, axis=1, dtype='float')
@@ -171,7 +173,7 @@ class CMNNPDF(CatEstimator):
 
                 # choose randomly from the color matched sample
                 if self.config.selection_mode == 0:
-                    rival = np.random.choice(index, size=1, replace=False)[0]
+                    rival = rng.choice(index, size=1, replace=False)[0]
                     out_pz = self.truez[rival]
                     out_pze = np.std(self.truez[index])
                     del rival
@@ -181,9 +183,9 @@ class CMNNPDF(CatEstimator):
                     tx = np.where(MahalanobisDistance[index] == np.nanmin(MahalanobisDistance[index]))[0]
                     if len(tx) == 1:
                         rval = tx[0]
-                    if len(tx) > 1:
+                    if len(tx) > 1:  # pragma: no cover
                         # if there's more than one best match (rare but possible), choose randomly
-                        rval = np.random.choice(tx, size=1, replace=False)[0]
+                        rval = rng.choice(tx, size=1, replace=False)[0]
                     out_pz = self.truez[index[rval]]
                     out_pze = np.std(self.truez[index])
                     del tx,rval
@@ -192,7 +194,7 @@ class CMNNPDF(CatEstimator):
                 if self.config.selection_mode == 2:
                     tweights = float(1.00) / MahalanobisDistance[index]
                     weights = tweights / np.sum(tweights)
-                    rival = np.random.choice(index, size=1, replace=False, p=weights)[0]
+                    rival = rng.choice(index, size=1, replace=False, p=weights)[0]
                     out_pz = self.truez[rival]
                     out_pze = np.std(self.truez[index])
                     del tweights, weights, rival
@@ -216,7 +218,7 @@ class CMNNPDF(CatEstimator):
                     out_pze = temp * (new_ppf_value / self.config.ppf_value)
                     del temp,new_ppf_value
                     if self.config.selection_mode == 0:
-                        rval = np.random.choice(self.config.min_n, size=1, replace=False)[0]
+                        rval = rng.choice(self.config.min_n, size=1, replace=False)[0]
                         out_pz = new_TZ[rval]
                         del rval
                     if self.config.selection_mode == 1:
@@ -224,12 +226,13 @@ class CMNNPDF(CatEstimator):
                     if self.config.selection_mode == 2:
                         tweights = float(1.00) / new_MD
                         weights = tweights / np.sum(tweights)
-                        cx = np.random.choice(self.config.min_n, size=1, replace=False, p=weights)[0]
+                        cx = rng.choice(self.config.min_n, size=1, replace=False, p=weights)[0]
                         out_pz = new_TZ[cx]
                         del tweights, weights, cx
                     del new_MD,new_TZ
                     Ncm = self.config.min_n
-                else:  # I think this would only happen if there are less than min_n gals in training set
+                else:  # pragma: no cover
+                    # I think this would only happen if there are less than min_n gals in training set
                     out_pz = self.config.bad_redshift_val
                     out_pze = self.config.bad_redshift_err
                     Ncm = 0
