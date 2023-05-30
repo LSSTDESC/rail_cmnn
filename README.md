@@ -1,6 +1,6 @@
 # rail_cmnn
 RAIL interface to Melissa Graham's CMNN algorithm.  A slight modification of the original code found here: <br>
-[https://github.com/
+[dirac-institute/CMNN_Photoz_estimator](https://github.com/dirac-institute/CMNN_Photoz_Estimator)
 
 See https://ui.adsabs.harvard.edu/abs/2018AJ....155....1G/abstract
 for more details on the code
