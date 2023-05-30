@@ -6,6 +6,8 @@ See https://ui.adsabs.harvard.edu/abs/2018AJ....155....1G/abstract
 for more details on the code
 Any use of `rail_cmnn` in a paper or report should cite [Graham et al. (2018)](https://ui.adsabs.harvard.edu/abs/2018AJ....155....1G/abstract).
 
+The current version of the code consists of a training stage, `Inform_CMNNPDF`, that computes colors for a set of training data (replacing non-detections with the 1-sigma limiting magnitude), and an estimation stage `CMNNPDF` that calculates the Mahalanobis distance to each training galaxy for each test galaxy and returns a single Guassian PDF for each galaxy where the mean can be estimated in one of three ways (see `selection mode` below), and the width is determined by the standard deviation of training galaxy redshifts within the threshold Mahalanobis distance.  Future implementation improvements may change the output format to include multiple Gaussians.
+
 `Inform_CMNNPDF` takes in a training data set and returns a model file that simply consists of the computed colors and color errors (magnitude errors added in quadrature) for that dataset, the model to be used in the `CMNNPDF` stage. A modification of the original CMNN algorithm, "nondetections" are now replaced by the 1-sigma limiting magnitudes and the non-detect magnitude errors replaced with a value of 1.0.  The config parameters that can be set by the user for `Inform_CMNNPDF` are:<br>
 - `bands`: list of the band names that should be present in the input data.<br>
 - `err_bands`: list of the magnitude error column names that should be present in the input data.<br>
