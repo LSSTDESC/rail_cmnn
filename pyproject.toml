@@ -1,7 +1,7 @@
 [project]
 name = "pz-rail-cmnn"
 description = "RAIL CMNN Interface"
-readme = "README.rst"
+readme = "README.md"
 requires-python = ">=3.8"
 license = { file = "LICENSE" }
 authors = [
