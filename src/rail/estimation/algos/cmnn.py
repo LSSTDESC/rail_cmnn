@@ -246,7 +246,8 @@ class CMNNPDF(CatEstimator):
                         tmpDOF = deg_of_freedom[index2]
                         new_DOF = np.asarray(tmpDOF[sx[0:self.config.min_n]], dtype='float')
                         lim_DOF = new_DOF[-1]
-                    del tempMD, tempTZ, sx, new_DOF
+                        del new_DOF
+                    del tempMD, tempTZ, sx
                     # calculate the new 'effective PPF' based on the most distant nearest neighbor
                     new_ppf_value = chi2.cdf(new_MD[-1], lim_DOF)
                     # inflate the photo-z error appropriately
