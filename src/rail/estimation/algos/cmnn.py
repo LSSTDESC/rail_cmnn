@@ -41,7 +41,7 @@ class Inform_CMNNPDF(CatInformer):
                           redshift_col=SHARED_PARAMS,
                           mag_limits=SHARED_PARAMS,
                           nondetect_val=SHARED_PARAMS,
-                          nondetect_replace=Param(bool, True, msg="set to True to replace non-detects,"
+                          nondetect_replace=Param(bool, False, msg="set to True to replace non-detects,"
                                                   " False to ignore in distance calculation"))
 
     def __init__(self, args, comm=None):
