@@ -30,11 +30,11 @@ def _computecolordata(data, column_names, err_names):
     return coldata.T, errdata.T
 
 
-class Inform_CMNNPDF(CatInformer):
+class CMNNInformer(CatInformer):
     """compute colors and color errors for CMNN training set and
-       store in a model file that will be used by the CMNNPDF stage
+       store in a model file that will be used by the CMNNEstimator stage
     """
-    name = 'Inform_CMNNPDF'
+    name = 'CMNNInformer'
     config_options = CatInformer.config_options.copy()
     config_options.update(bands=SHARED_PARAMS,
                           err_bands=SHARED_PARAMS,
@@ -78,7 +78,7 @@ class Inform_CMNNPDF(CatInformer):
         self.add_data('model', self.model)
 
 
-class CMNNPDF(CatEstimator):
+class CMNNEstimator(CatEstimator):
     """Color Matched Nearest Neighbor Estimator
     Note that there are several modifications from the original CMNN, mainly that
     the original estimator dropped non-detections from the Mahalnobis distance
@@ -103,7 +103,7 @@ class CMNNPDF(CatEstimator):
     should only happen if the number of training galaxies is smaller than
     min_n, which is unlikely, but is included here for completeness.
     """
-    name = 'CMNNPDF'
+    name = 'CMNNEstimator'
     config_options = CatEstimator.config_options.copy()
     config_options.update(zmin=SHARED_PARAMS,
                           zmax=SHARED_PARAMS,
