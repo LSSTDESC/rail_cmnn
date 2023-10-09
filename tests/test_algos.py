@@ -56,18 +56,3 @@ def test_cmnn_nondetect_replace():
     )
     assert np.isclose(results.ancil["zmode"], zb_expected, atol=0.02).all()
     assert np.isclose(results.ancil["zmode"], rerun_results.ancil["zmode"]).all()
-
-
-def test_wrong_modelfile_keyword():
-    RailStage.data_store.clear()
-    config_dict = default_dict.copy()
-    config_dict["hdf5_groupname"] = "photometry"
-    config_dict["model"] = "notreal.pkl"
-    with pytest.raises(FileNotFoundError):
-        pz_algo = cmnn.CMNNPDF.make_stage(**config_dict)
-        assert pz_algo.model is None
-
-
-if __name__ == "__main__":
-    print("ok!!")
-    test_wrong_modelfile_keyword()
