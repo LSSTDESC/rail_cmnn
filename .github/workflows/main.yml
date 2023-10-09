@@ -49,7 +49,7 @@ jobs:
     - name: Lint with pylint
       run: |
         pip install pylint
-        # stop the build if there are Pylint errors
+        # do not stop the build if there are Pylint errors
         pylint --recursive=y --exit-zero --extension-pkg-whitelist=numpy .
     - name: Lint with flake8
       run: |
