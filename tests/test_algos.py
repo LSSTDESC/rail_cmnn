@@ -58,7 +58,7 @@ def test_cmnn_nondetect_replace():
     assert np.isclose(results.ancil['zmode'], rerun_results.ancil['zmode']).all()
 
 
-def test_missing_groupname_keyword():
+def test_missing_groupname_keyword(): # small change to trigger action, to confirm this failing
     config_dict = default_dict.copy()
     with pytest.raises(ValueError):
         _ = cmnn.CMNNPDF.make_stage(**config_dict)
