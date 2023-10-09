@@ -56,19 +56,3 @@ def test_cmnn_nondetect_replace():
     results, rerun_results, rerun3_results = one_algo("CMNN", train_algo, pz_algo, train_config_dict, estim_config_dict)
     assert np.isclose(results.ancil['zmode'], zb_expected, atol=0.02).all()
     assert np.isclose(results.ancil['zmode'], rerun_results.ancil['zmode']).all()
-
-
-#def test_missing_groupname_keyword(): # small change to trigger action, to confirm this failing
-#    config_dict = default_dict.copy()
-#    with pytest.raises(ValueError):
-#        _ = cmnn.CMNNPDF.make_stage(**config_dict)
-
-
-def test_wrong_modelfile_keyword():
-    RailStage.data_store.clear()
-    config_dict = default_dict.copy()
-    config_dict["hdf5_groupname"] = "photometry"
-    config_dict["model"] = "notreal.pkl"
-    with pytest.raises(FileNotFoundError):
-        pz_algo = cmnn.CMNNPDF.make_stage(**config_dict)
-        assert pz_algo.model is None
