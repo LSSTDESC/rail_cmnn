@@ -3,9 +3,8 @@ import pytest
 from rail.core.stage import RailStage
 
 # from rail.core.data import DataStore, TableHandle
-from rail.core.algo_utils import one_algo
+from rail.utils.algo_utils import one_algo
 
-# from rail.core.utils import RAILDIR
 from rail.estimation.algos import cmnn
 
 default_dict = {"zmin": 0.0, "zmax": 3.0, "nzbins": 301, "min_n": 4}
