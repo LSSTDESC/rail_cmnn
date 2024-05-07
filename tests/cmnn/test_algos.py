@@ -3,7 +3,7 @@ import pytest
 from rail.core.stage import RailStage
 
 # from rail.core.data import DataStore, TableHandle
-from rail.utils.algo_utils import one_algo
+from rail.utils.testing_utils import one_algo
 
 from rail.estimation.algos import cmnn
 
