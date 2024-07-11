@@ -47,7 +47,7 @@ class CMNNInformer(CatInformer):
     def __init__(self, args, **kwargs):
         """ Constructor
         Do CatInformer specific initialization, then check on bands """
-        super().__init__(self, args, **kwargs)
+        super().__init__(args, **kwargs)
 
     def run(self):
         if self.config.hdf5_groupname:
@@ -130,7 +130,7 @@ class CMNNEstimator(CatEstimator):
         self.truezs = None
         self.model = None
         self.zgrid = None
-        super().__init__(self, args, **kwargs)
+        super().__init__(args, **kwargs)
         usecols = self.config.bands.copy()
         usecols.append(self.config.redshift_col)
         self.usecols = usecols
