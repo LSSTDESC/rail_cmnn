@@ -20,7 +20,7 @@ dependencies = [
     "ceci",
     "numpy",
     "scipy>=1.9",
-    "ceci2 @ https://github.com/LSSTDESC/rail_base",
+    "ceci2 @ git+https://github.com/LSSTDESC/rail_base",
 ]
 
 
