@@ -20,7 +20,7 @@ dependencies = [
     "ceci",
     "numpy",
     "scipy>=1.9",
-    "pz-rail-base",
+    "ceci2 @ https://github.com/LSSTDESC/rail_base",
 ]
 
 
