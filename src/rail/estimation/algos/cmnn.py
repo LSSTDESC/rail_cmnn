@@ -44,10 +44,10 @@ class CMNNInformer(CatInformer):
                           nondetect_replace=Param(bool, False, msg="set to True to replace non-detects,"
                                                   " False to ignore in distance calculation"))
 
-    def __init__(self, args, comm=None):
+    def __init__(self, args, **kwargs):
         """ Constructor
         Do CatInformer specific initialization, then check on bands """
-        CatInformer.__init__(self, args, comm=comm)
+        super().__init__(self, args, **kwargs)
 
     def run(self):
         if self.config.hdf5_groupname:
@@ -124,13 +124,13 @@ class CMNNEstimator(CatEstimator):
                           bad_redshift_err=Param(float, 10., msg="Gauss error width to assign to bad redshifts")
                           )
 
-    def __init__(self, args, comm=None):
+    def __init__(self, args, **kwargs):
         """ Constructor:
         Do Estimator specific initialization """
         self.truezs = None
         self.model = None
         self.zgrid = None
-        CatEstimator.__init__(self, args, comm=comm)
+        super().__init__(self, args, **kwargs)
         usecols = self.config.bands.copy()
         usecols.append(self.config.redshift_col)
         self.usecols = usecols
