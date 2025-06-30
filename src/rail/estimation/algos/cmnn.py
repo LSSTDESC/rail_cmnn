@@ -279,4 +279,4 @@ class CMNNEstimator(CatEstimator):
         ens = qp.Ensemble(qp.stats.norm, data=dict(loc=np.expand_dims(chunk_pz, -1),
                                                    scale=np.expand_dims(chunk_pze, -1)))
         ens.set_ancil(dict(ncolors=chunk_colused, zmode=chunk_pz, Ncm=chunk_ncm))
-        self._do_chunk_output(ens, start, end, first)
+        self._do_chunk_output(ens, start, end, first, data=data)
