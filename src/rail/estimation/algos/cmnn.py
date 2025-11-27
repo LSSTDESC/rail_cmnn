@@ -36,6 +36,7 @@ class CMNNInformer(CatInformer):
     """
 
     name = "CMNNInformer"
+    entrypoint_function = "inform"  # the user-facing science function for this class
     config_options = CatInformer.config_options.copy()
     config_options.update(
         bands=SHARED_PARAMS,
@@ -118,6 +119,7 @@ class CMNNEstimator(CatEstimator):
     """
 
     name = "CMNNEstimator"
+    entrypoint_function = "estimate"  # the user-facing science function for this class
     config_options = CatEstimator.config_options.copy()
     config_options.update(
         zmin=SHARED_PARAMS,
