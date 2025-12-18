@@ -16,7 +16,7 @@ classifiers = [
 ]
 dynamic = ["version"]
 
-dependencies = ["ceci", "numpy", "scipy>=1.9", "pz-rail-base>=2.0.0"]
+dependencies = ["ceci", "numpy", "scipy>=1.9", "pz-rail-base>=2.0.0-dev"]
 
 
 # On a mac, install optional dependencies with `pip install '.[dev]'` (include the single quotes)
