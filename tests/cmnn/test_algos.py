@@ -31,9 +31,11 @@ def test_cmnn(out_method, zb_expected):
     #                         0.12, 0.12])
     train_algo = cmnn.CMNNInformer
     pz_algo = cmnn.CMNNEstimator
-    results, rerun_results, rerun3_results = one_algo("CMNN", train_algo, pz_algo, train_config_dict, estim_config_dict)
-    assert np.isclose(results.ancil['zmode'], zb_expected, atol=0.02).all()
-    assert np.isclose(results.ancil['zmode'], rerun_results.ancil['zmode']).all()
+    results, rerun_results, rerun3_results = one_algo(
+        "CMNN", train_algo, pz_algo, train_config_dict, estim_config_dict
+    )
+    assert np.isclose(results.ancil["zmode"], zb_expected, atol=0.02).all()
+    assert np.isclose(results.ancil["zmode"], rerun_results.ancil["zmode"]).all()
 
 
 def test_cmnn_nondetect_replace():
@@ -45,10 +47,11 @@ def test_cmnn_nondetect_replace():
 
     estim_config_dict["hdf5_groupname"] = "photometry"
     estim_config_dict["model"] = "model.tmp"
-    zb_expected = np.array([0.11, 0.15, 0.14, 0.13, 0.11, 0.13, 0.15, 0.15,
-                            0.11, 0.11])
+    zb_expected = np.array([0.11, 0.15, 0.14, 0.13, 0.11, 0.13, 0.15, 0.15, 0.11, 0.11])
     train_algo = cmnn.CMNNInformer
     pz_algo = cmnn.CMNNEstimator
-    results, rerun_results, rerun3_results = one_algo("CMNN", train_algo, pz_algo, train_config_dict, estim_config_dict)
-    assert np.isclose(results.ancil['zmode'], zb_expected, atol=0.02).all()
-    assert np.isclose(results.ancil['zmode'], rerun_results.ancil['zmode']).all()
+    results, rerun_results, rerun3_results = one_algo(
+        "CMNN", train_algo, pz_algo, train_config_dict, estim_config_dict
+    )
+    assert np.isclose(results.ancil["zmode"], zb_expected, atol=0.02).all()
+    assert np.isclose(results.ancil["zmode"], rerun_results.ancil["zmode"]).all()
