@@ -170,7 +170,7 @@ class CMNNEstimator(CatEstimator):
         self.nondet_choice = self.model["nondet_choice"]
 
     def _process_chunk(self, start, end, data, first):
-        print(f"Process {self.rank} estimating PZ PDF for rows {start:,} - {end:,}")
+        self.log.info(f"Process {self.rank} estimating PZ PDF for rows {start:,} - {end:,}")
         # replace nondetects
         for col, err in zip(self.config.bands, self.config.err_bands):
             if np.isnan(self.config.nondetect_val):  # pragma: no cover
